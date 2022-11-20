@@ -1,0 +1,40 @@
+Server creation -Node and Express
+
+BASIC COMMANDS
+
+1.CREATING package.json-npm init
+2.INSTALL Express - npm i Express
+3.Instal JWT-npm i jsonewebtoken
+
+BASIC STEPS
+-----------------------
+
+1 creating a folder
+2 creating package.json file
+3 install Express
+4 creating index.js file
+5  import express inside index file
+6 create app using express
+7 setup port number
+8 Resolving http request
+
+9 HTTP Response code 
+--------------------------
+1xx-Information
+2xx-success
+3xx-Redirection
+4xx-cilent error
+5xx-server error
+
+10 JWT (JSON WEB TOKEN)- Authentication
+
+
+ generated tokenserver                           request+number
+login.....................................>client........................>server.........>
+
+11  Middleware
+
+a.Application specification middleware
+
+b.Router specific middleware-for token validation-jwt middleware--uses
+ verify()-token validatin
