@@ -1,6 +1,11 @@
 //import jwt
 
-const jwt=require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
+
+
+// import db
+
+const db = require('./db')
 
 
 userDetails = {//object of objects
@@ -13,32 +18,63 @@ userDetails = {//object of objects
 
 const register = (acno, username, password) => {
 
-    if (acno in userDetails) {
+    return db.User.findOne({ acno })   //27017
+        .then(User => {
+            if (User) {
+                return {
+                    statusCode: 401,
+                    status: false,
+                    message: 'User already registered'
+                }
+            }
+            else {
+                const newUser = new db.User({
+                    acno,
+                    username,
+                    password,
+                    balance: 0,
+                    transaction: []
 
-        return {
-            statusCode: 401,
-            status: false,
-            message: 'user already registered'
-        }
-    }
-    else {
-        userDetails[acno] = {
-            acno,
-            username,
-            password,
-            balance: 0,
-            transaction: []
-        }
-        console.log(userDetails);
+                })
+                newUser.save() //to save to mongodb
+                return {
+                    statusCode: 200,
+                    status: true,
+                    message: 'successfully registered'
+                }
+            }
+        })
 
-        //function call
-        return {
-            statusCode: 200,
-            status: true,
-            message: 'successfully registered'
-        }
-    }
+
+
+
 }
+// if (acno in userDetails) {
+
+//     return {
+//         statusCode: 401,
+//         status: false,
+//         message: 'user already registered'
+//     }
+// }
+// else {
+//     userDetails[acno] = {
+//         acno,
+//         username,
+//         password,
+//         balance: 0,
+//         transaction: []
+//     }
+//     console.log(userDetails);
+
+//function call
+// return {
+//     statusCode: 200,
+//     status: true,
+//     message: 'successfully registered'
+// }
+
+
 
 const login = (acno, pswd) => {
 

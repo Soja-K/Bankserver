@@ -27,7 +27,7 @@ app.listen(3000,()=>{
 
 //Application specific middleware
 
-const appMiddleware=(req,res,next)=>{
+const appMiddleware=(req ,res ,next)=>{
  console.log('application specific middleware');
  next();
 
@@ -38,10 +38,11 @@ app.use(appMiddleware)
 
 const jwtMiddleware=(req,res,next)=>{
     try{
-    const token=req.body.token;
+    const token=req.headers['x-access-token'];
     //verify the token -verify()method used
     console.log('Router specific middleware');
     const data=jwt.verify(token,'superkey2020')
+    console.log(data);
     next();
 }
 catch{
@@ -108,8 +109,10 @@ catch{
 
 app.post('/register',(req,res)=>{
     console.log(res.body);
-    const result=dataService.register(req.body.acno,req.body.username,req.body.password);
-    res.status(result.statusCode).json(result)
+dataService.register(req.body.acno,req.body.username,req.body.password)
+   .then(result=>{
+    res.status(result.statusCode).json(result);
+   })
 
 //     if(result){
 //         res.send('sucessfully registered');
