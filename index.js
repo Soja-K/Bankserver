@@ -128,24 +128,31 @@ dataService.register(req.body.acno,req.body.username,req.body.password)
 
 app.post('/login',(req,res)=>{
     console.log(res.body);
-    const result=dataService.login(req.body.acno,req.body.pswd);
-    res.status(result.statusCode).json(result)
+dataService.login(req.body.acno,req.body.pswd)
+    .then(result=>{
+        
+    res.status(result.statusCode).json(result);
+})
 })
 
 
 //Resolving deposited request-post method
 app.post('/deposit',jwtMiddleware,(req,res)=>{
     console.log(res.body);
-    const result=dataService.deposit(req.body.acno,req.body.pswd,req.body.amount);
-    res.status(result.statusCode).json(result)
+dataService.deposit(req.body.acno,req.body.pswd,req.body.amount)
+.then(result=>{
+    res.status(result.statusCode).json(result);
+})
 })
 
 
 //Resolving withdrawn request-post method
 app.post('/withdraw',(req,res)=>{
     console.log(res.body);
-    const result=dataService.withdraw(req.body.acno,req.body.pswd,req.body.amount);
+    const result=dataService.withdraw(req.body.acno,req.body.pswd,req.body.amount)
+    .then(result=>{
     res.status(result.statusCode).json(result)
+})
 })
 
 //Resolving transaction request-post method
