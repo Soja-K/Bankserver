@@ -208,8 +208,8 @@ const withdraw = (acno, pswd, amt) => {
     var amount = parseInt(amt);
     return db.User.findOne({ acno, password: pswd })
         .then(User => {
-            if (User)  {
-               User.balance -= amount;
+            if (User) {
+                User.balance -= amount;
                 User.transaction.push({
                     type: 'Debit',
                     amount
@@ -223,7 +223,7 @@ const withdraw = (acno, pswd, amt) => {
                     status: true,
                     message: `${amount} is debited and new balence is ${User.balance}`
                 }
-            
+
             }
 
             else {
@@ -236,8 +236,8 @@ const withdraw = (acno, pswd, amt) => {
             }
 
         })
-    }
-    
+}
+
 // }
 //         else {
 
@@ -263,15 +263,27 @@ const withdraw = (acno, pswd, amt) => {
 
 // }
 const getTransaction = (acno) => {
+    return db.User.findOne({ acno })
+        .then(User => {
+            if (User) {
 
-    return {
-        statusCode: 200,
-        status: true,
-        transaction: userDetails[acno]['transaction']
-    }
+                return {
+                    statusCode: 200,
+                    status: true,
+                    transaction: User['transaction']
+                }
+            }
+            else {
+                return {
+                    statusCode: 402,
+                    status: false,
+                    message: 'user not found'
+                }
+
+            }
+
+        })
 }
-
-
 
 
 //export

@@ -158,6 +158,8 @@ app.post('/withdraw',(req,res)=>{
 //Resolving transaction request-post method
 app.post('/transaction',(req,res)=>{
     console.log(res.body);
-    const result=dataService.getTransaction(req.body.acno);
+    const result=dataService.getTransaction(req.body.acno)
+.then(result=>{
     res.status(result.statusCode).json(result)
+})
 })

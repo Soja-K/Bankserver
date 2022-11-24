@@ -5,6 +5,7 @@ BASIC COMMANDS
 1.CREATING package.json-npm init
 2.INSTALL Express - npm i Express
 3.Instal JWT-npm i jsonewebtoken
+install mongoose- npm i mongoose
 
 BASIC STEPS
 -----------------------
@@ -38,3 +39,10 @@ a.Application specification middleware
 
 b.Router specific middleware-for token validation-jwt middleware--uses
  verify()-token validatin
+
+
+12.Database Integration
+
+using mongoose
+
+Database connection
